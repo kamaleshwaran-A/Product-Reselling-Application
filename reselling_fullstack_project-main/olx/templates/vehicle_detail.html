@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Detail</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Basic Styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-dark.bg-dark {
+            background-color: #343a40 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Vehicle Detail Section */
+        .vehicle-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 70px;
+            flex-wrap: wrap;
+        }
+
+        .vehicle-info {
+            width: 48%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .vehicle-info h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .vehicle-info p {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .vehicle-info .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .btn-back {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+
+        .vehicle-info .details-section {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Image Styling */
+        .vehicle-detail img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Cart Summary Section */
+        .cart-summary {
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .cart-summary button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-summary button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .vehicle-detail {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+
+            .vehicle-info {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .vehicle-detail img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand font-weight-bold text-white" href="{{ url_for('home') }}">Vehicle Marketplace</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-white" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('my_products') }}">My Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('view_cart') }}">wishcart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Vehicle Detail Section -->
+<div class="container vehicle-detail">
+    <!-- Vehicle Info (Left) -->
+    <div class="vehicle-info">
+        <p class="price"><strong>Price:</strong> ${{ vehicle[4] }}</p> <!-- Vehicle Price -->
+
+        <div class="details-section">
+            <p><strong>Description:</strong> {{ vehicle[3] }}</p> <!-- Vehicle Description -->
+            <p><strong>Type:</strong> {{ vehicle[2] }}</p> <!-- Vehicle Type -->
+            <p><strong>Brand:</strong> {{ vehicle[6] }}</p> <!-- Vehicle Brand -->
+            <p><strong>Model:</strong> {{ vehicle[7] }}</p> <!-- Vehicle Model -->
+            <p><strong>Year:</strong> {{ vehicle[8] }}</p> <!-- Vehicle Year -->
+            <p><strong>Mileage:</strong> {{ vehicle[9] }} km</p> <!-- Vehicle Mileage -->
+            <p><strong>Condition:</strong> {{ vehicle[10] }}</p> <!-- Vehicle Condition -->
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+            <h3>Cart Summary</h3>
+            <p>Total: ${{ vehicle[4] }}</p>
+            <h1>Checkout</h1>
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <div class="form-group">
+                    <label for="offer_price">Enter Negotiated Price:</label>
+                    <input type="number" class="form-control" id="offer_price" name="offer_price" placeholder="Enter your offer price" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address:</label>
+                    <textarea class="form-control" id="address" name="address" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+            </form>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="btn-back">Back to Marketplace</a>
+    </div>
+
+    <!-- Vehicle Image (Right) -->
+    <div style="width: 48%;">
+        <img src="{{ url_for('uploaded_file', filename=vehicle[5].split('/')[-1]) }}" alt="Vehicle Image">
+        <img src="{{ url_for('uploaded_file', filename=vehicle[11].split('/')[-1]) }}" alt="Vehicle Image">
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

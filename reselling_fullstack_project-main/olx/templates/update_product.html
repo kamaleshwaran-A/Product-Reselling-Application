@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General Body Styling */
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Form Label Styling */
+        .form-group label {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        /* Input and Textarea Styling */
+        .form-control {
+            border-radius: 10px;
+            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+            margin-bottom: 20px;
+        }
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        /* File Input Styling */
+        .form-control-file {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            padding: 5px;
+            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 14px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            padding: 14px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Section Background */
+        .form-section {
+            background-color: #f1f1f1;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Custom Margin for Back Button */
+        .ml-2 {
+            margin-left: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .form-control,
+            .btn-primary,
+            .btn-secondary {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <title>Update Vehicle</title>
+</head>
+<body>
+
+<!-- Container for Update Vehicle Form -->
+<div class="container">
+    <h1>Update Vehicle</h1>
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="form-section">
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ product[2] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required>{{ product[3] }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand" value="{{ product[6] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="model" name="model" value="{{ product[7] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" value="{{ product[4] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" class="form-control" id="year" name="year" value="{{ product[8] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mileage">Mileage (km)</label>
+                <input type="number" class="form-control" id="mileage" name="mileage" value="{{ product[9] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="condition">Condition</label>
+                <input type="text" class="form-control" id="condition" name="condition" value="{{ product[10] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+
+            <div class="form-group">
+                <label for="img">Book Image</label>
+                <input type="file" class="form-control-file" id="img" name="img">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Product</button>
+        <a href="{{ url_for('my_products') }}" class="btn btn-secondary ml-2">Back to Products</a>
+    </form>
+</div>
+
+</body>
+</html>

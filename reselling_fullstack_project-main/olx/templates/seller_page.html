@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            margin-bottom: 30px;
+        }
+
+        .navbar-brand {
+            color: #007bff !important;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover {
+            color: #0056b3 !important;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f1f1f1;
+        }
+
+        .alert {
+            margin-top: 30px;
+        }
+
+        .btn-sm {
+            margin: 0 5px;
+        }
+
+        .page-header {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Custom button styles */
+        .btn-custom {
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            width: 120px;
+        }
+
+        .btn-custom-accept {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-custom-reject {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-custom-accept:hover {
+            background-color: #218838;
+        }
+
+        .btn-custom-reject:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive table styling */
+        @media (max-width: 768px) {
+            .table th, .table td {
+                padding: 8px;
+            }
+
+            .page-header {
+                font-size: 1.5rem;
+            }
+
+            .btn-custom {
+                width: 100%;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ url_for('home') }}">Vehicle Marketplace</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('my_products') }}">My Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('view_cart') }}">wishcart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="page-header">Seller's Orders</h1>
+
+    {% if sales %}
+    <div class="table-container">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Negotiated Price</th>
+                <th>Buyer Name</th>
+                <th>Buyer Email</th>
+                <th>Buyer Address</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale[0] }}</td> <!-- order_id -->
+                <td>{{ sale[1] }}</td> <!-- product_name -->
+                <td>${{ sale[2] }}</td> <!-- product_price -->
+                <td>${{ sale[3] }}</td> <!-- offer -->
+                <td>{{ sale[4] }}</td> <!-- buyer_name -->
+                <td>{{ sale[5] }}</td> <!-- buyer_email -->
+                <td>{{ sale[6] }}</td> <!-- buyer_address -->
+                <td class="action-btns">
+                    <form method="POST" action="{{ url_for('accept_offer', order_id=sale[0]) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-custom btn-custom-accept btn-sm">Accept</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('reject_offer', order_id=sale[0]) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-custom btn-custom-reject btn-sm">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        No sales found for this seller.
+    </div>
+    {% endif %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
