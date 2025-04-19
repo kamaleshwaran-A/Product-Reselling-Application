@@ -1,36 +1,53 @@
-## ♻️ Object Reselling Platform
-This project is a full-fledged Object Reselling Web Application developed using Flask, Python, and MySQL. It allows users to buy and sell used items by creating listings, managing profiles, and interacting with other users. This application is perfect for campus exchanges, local marketplaces, or community thrift deals.
+## 🛒 Object Resell App – Used Product Marketplace
+## ✨ Overview
+Object Resell App is a web-based marketplace that allows users to buy and sell used items. Built with Flask and MySQL, the platform offers a clean interface for posting product listings, browsing available items, and managing your own products — making it easier for students and general users to resell goods efficiently.
 
-## 🔧 Features
-🔐 User registration & login
+## 🚀 Key Features
+📤 List Items for Sale – Users can post used products with images and descriptions.
 
-📦 Product listing with images and descriptions
+🛒 Buy Used Products – Browse listings and connect with sellers.
 
-🛒 View, search, and filter available items
+🔍 Search & Filter Items – Find products by category, price, or keyword.
 
-📝 Seller dashboard to manage listings
+👤 User Authentication – Secure login and signup using Flask sessions.
 
-💬 Contact or inquire about a product
+📋 Product History – View previous listings and interactions.
 
-🗃️ MySQL database for persistent storage
+✏️ Edit/Delete Listings – Users can update or remove their posted products.
 
-💻 Built with Flask (Backend) + HTML/CSS/Bootstrap (Frontend)
+💬 Contact Seller Info – Display seller contact details per product.
 
-## 📦 Tech Stack
-Frontend: HTML, CSS, Bootstrap
+📱 Responsive Design – Smooth usage on both desktop and mobile screens.
 
-Backend: Flask (Python)
+## 🛠️ Tech Stack
+🐍 Backend: Flask (Python)
 
-Database: MySQL
+🗄️ Database: MySQL
 
-Tools: Jinja2 templating, Flask routing, Sessions, SQL queries
+🎨 Frontend: HTML, CSS, JavaScript
 
-## 🚀 Use Case
-Perfect for:
+🔐 Authentication: Flask Login & Session Management
 
-College students reselling items like books, electronics, etc.
+🧰 Tools: Jinja Templates, Bootstrap
 
-Local communities looking to minimize waste through item reuse
-
-Peer-to-peer e-commerce setups
+## ⚙️ Getting Started
+1. 💻 Clone the repo
+   ``` sh
+   git clone https://github.com/kamaleshwaran-A/Product-Reselling-Application.git
+   cd Product-Reselling-Application
+2. 📦 Set up the environment
+   ```sh
+   npm install
+   pip install flask flask-mysqldb werkzeug
+   ```
+ 3. 🛠️ Configure the database
+    Create a MySQL database and update the connection config in app.py
+ 4. ▶️ Run the app
+  ```sh
+python app.py
+```
+## 🤝 Contributing
+We 💙 contributions!
+Feel free to fork the repo, make your changes, and submit a pull request. Let’s build a great reselling platform together!
+ 
 
